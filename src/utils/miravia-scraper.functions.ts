@@ -64,22 +64,24 @@ export const scrapeMiraviaBrands = createServerFn({ method: "POST" })
     }
 
     try {
-      // Step 1: Scrape the page with markdown + links
+      // Use AbortController for a 20s timeout (serverless limit is ~25s)
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 20000);
+
       const scrapeRes = await fetch(`${FIRECRAWL_API_URL}/scrape`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
         },
+        signal: controller.signal,
         body: JSON.stringify({
           url,
           formats: [
-            "markdown",
-            "links",
             {
               type: "json",
               prompt:
-                "Extract all sellers/stores/brands visible on this e-commerce page. For each one, extract: store_name (the seller or brand name), category (product category), product_type (specific type of product), has_discount (boolean, whether any product has a discount), store_url (link to the store page if available). Return an array of objects.",
+                "Extract all sellers/stores/brands visible on this e-commerce page. For each, extract: store_name, category, product_type, has_discount (boolean), store_url. Return an array.",
               schema: {
                 type: "object",
                 properties: {
@@ -100,10 +102,13 @@ export const scrapeMiraviaBrands = createServerFn({ method: "POST" })
               },
             },
           ],
-          waitFor: 3000,
+          waitFor: 2000,
           onlyMainContent: true,
+          timeout: 15000,
         }),
       });
+
+      clearTimeout(timeoutId);
 
       if (!scrapeRes.ok) {
         const errBody = await scrapeRes.text();
