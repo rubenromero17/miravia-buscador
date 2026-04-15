@@ -8,7 +8,7 @@ import { BrandCard } from "@/components/BrandCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FileDown, Search, Store, Loader2, Wifi, WifiOff } from "lucide-react";
-import { useServerFn } from "@tanstack/react-start";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
