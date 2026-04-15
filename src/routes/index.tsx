@@ -8,7 +8,7 @@ import { BrandCard } from "@/components/BrandCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FileDown, Search, Store, Loader2, Wifi, WifiOff } from "lucide-react";
-import { useServerFn } from "@tanstack/react-start";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -33,15 +33,13 @@ function Index() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const scrapeFn = useServerFn(scrapeMiraviaBrands);
-
   const brands = useMemo(() => filterBrands(allBrands, filters), [allBrands, filters]);
 
   const handleScrape = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const result = await scrapeFn({
+      const result = await scrapeMiraviaBrands({
         data: {
           category: filters.category || undefined,
           search: filters.search || undefined,
@@ -65,7 +63,7 @@ function Index() {
     } finally {
       setIsLoading(false);
     }
-  }, [scrapeFn, filters.category, filters.search]);
+  }, [filters.category, filters.search]);
 
   const handleUseMock = useCallback(() => {
     setAllBrands(MOCK_BRANDS);
