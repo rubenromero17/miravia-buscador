@@ -7,129 +7,23 @@ export interface Brand {
   phone: string | null;
   location: string;
   hasDiscounts: boolean;
+  storeUrl?: string | null;
 }
 
-const MOCK_BRANDS: Brand[] = [
-  {
-    id: "1",
-    name: "NaturVida",
-    category: "Belleza y Salud",
-    productType: "Cuidado facial",
-    email: "contacto@naturvida.es",
-    phone: "+34 912 345 678",
-    location: "Madrid, España",
-    hasDiscounts: true,
-  },
-  {
-    id: "2",
-    name: "FreshMarket",
-    category: "Supermercado",
-    productType: "Snacks",
-    email: "info@freshmarket.es",
-    phone: "+34 933 456 789",
-    location: "Barcelona, España",
-    hasDiscounts: false,
-  },
-  {
-    id: "3",
-    name: "GlowSkin",
-    category: "Belleza y Salud",
-    productType: "Maquillaje",
-    email: "hello@glowskin.com",
-    phone: null,
-    location: "Valencia, España",
-    hasDiscounts: true,
-  },
-  {
-    id: "4",
-    name: "TechZone",
-    category: "Electrónica",
-    productType: "Móviles",
-    email: "ventas@techzone.es",
-    phone: "+34 955 678 901",
-    location: "Sevilla, España",
-    hasDiscounts: true,
-  },
-  {
-    id: "5",
-    name: "ModaTrend",
-    category: "Moda",
-    productType: "Ropa mujer",
-    email: null,
-    phone: "+34 944 789 012",
-    location: "Bilbao, España",
-    hasDiscounts: false,
-  },
-  {
-    id: "6",
-    name: "BioEssence",
-    category: "Belleza y Salud",
-    productType: "Cuidado capilar",
-    email: "info@bioessence.es",
-    phone: "+34 961 890 123",
-    location: "Málaga, España",
-    hasDiscounts: true,
-  },
-  {
-    id: "7",
-    name: "SuperAhorro",
-    category: "Supermercado",
-    productType: "Bebidas",
-    email: "contacto@superahorro.es",
-    phone: "+34 976 012 345",
-    location: "Zaragoza, España",
-    hasDiscounts: false,
-  },
-  {
-    id: "8",
-    name: "PixelPro",
-    category: "Electrónica",
-    productType: "Accesorios",
-    email: "soporte@pixelpro.es",
-    phone: "+34 928 123 456",
-    location: "Las Palmas, España",
-    hasDiscounts: true,
-  },
-  {
-    id: "9",
-    name: "UrbanStyle",
-    category: "Moda",
-    productType: "Calzado",
-    email: "hola@urbanstyle.es",
-    phone: null,
-    location: "Madrid, España",
-    hasDiscounts: true,
-  },
-  {
-    id: "10",
-    name: "DeliFoods",
-    category: "Supermercado",
-    productType: "Conservas",
-    email: "pedidos@delifoods.es",
-    phone: "+34 941 234 567",
-    location: "Barcelona, España",
-    hasDiscounts: false,
-  },
-  {
-    id: "11",
-    name: "SkinLab",
-    category: "Belleza y Salud",
-    productType: "Cuidado corporal",
-    email: null,
-    phone: "+34 952 345 678",
-    location: "Granada, España",
-    hasDiscounts: false,
-  },
-  {
-    id: "12",
-    name: "MegaByte",
-    category: "Electrónica",
-    productType: "Portátiles",
-    email: "info@megabyte.es",
-    phone: "+34 965 456 789",
-    location: "Alicante, España",
-    hasDiscounts: true,
-  },
+// Mock data as fallback when scraping fails
+export const MOCK_BRANDS: Brand[] = [
+  { id: "1", name: "NaturVida", category: "Belleza y Salud", productType: "Cuidado facial", email: "contacto@naturvida.es", phone: "+34 912 345 678", location: "Madrid, España", hasDiscounts: true },
+  { id: "2", name: "FreshMarket", category: "Supermercado", productType: "Snacks", email: "info@freshmarket.es", phone: "+34 933 456 789", location: "Barcelona, España", hasDiscounts: false },
+  { id: "3", name: "GlowSkin", category: "Belleza y Salud", productType: "Maquillaje", email: "hello@glowskin.com", phone: null, location: "Valencia, España", hasDiscounts: true },
+  { id: "4", name: "TechZone", category: "Electrónica", productType: "Móviles", email: "ventas@techzone.es", phone: "+34 955 678 901", location: "Sevilla, España", hasDiscounts: true },
+  { id: "5", name: "ModaTrend", category: "Moda", productType: "Ropa mujer", email: null, phone: "+34 944 789 012", location: "Bilbao, España", hasDiscounts: false },
+  { id: "6", name: "BioEssence", category: "Belleza y Salud", productType: "Cuidado capilar", email: "info@bioessence.es", phone: "+34 961 890 123", location: "Málaga, España", hasDiscounts: true },
+  { id: "7", name: "SuperAhorro", category: "Supermercado", productType: "Bebidas", email: "contacto@superahorro.es", phone: "+34 976 012 345", location: "Zaragoza, España", hasDiscounts: false },
+  { id: "8", name: "PixelPro", category: "Electrónica", productType: "Accesorios", email: "soporte@pixelpro.es", phone: "+34 928 123 456", location: "Las Palmas, España", hasDiscounts: true },
+  { id: "9", name: "UrbanStyle", category: "Moda", productType: "Calzado", email: "hola@urbanstyle.es", phone: null, location: "Madrid, España", hasDiscounts: true },
+  { id: "10", name: "DeliFoods", category: "Supermercado", productType: "Conservas", email: "pedidos@delifoods.es", phone: "+34 941 234 567", location: "Barcelona, España", hasDiscounts: false },
+  { id: "11", name: "SkinLab", category: "Belleza y Salud", productType: "Cuidado corporal", email: null, phone: "+34 952 345 678", location: "Granada, España", hasDiscounts: false },
+  { id: "12", name: "MegaByte", category: "Electrónica", productType: "Portátiles", email: "info@megabyte.es", phone: "+34 965 456 789", location: "Alicante, España", hasDiscounts: true },
 ];
 
 export const CATEGORIES = [
@@ -137,6 +31,9 @@ export const CATEGORIES = [
   "Belleza y Salud",
   "Electrónica",
   "Moda",
+  "Hogar y Jardín",
+  "Deportes",
+  "Juguetes",
 ];
 
 export const PRODUCT_TYPES: Record<string, string[]> = {
@@ -144,6 +41,9 @@ export const PRODUCT_TYPES: Record<string, string[]> = {
   "Belleza y Salud": ["Cuidado facial", "Maquillaje", "Cuidado capilar", "Cuidado corporal"],
   Electrónica: ["Móviles", "Accesorios", "Portátiles"],
   Moda: ["Ropa mujer", "Calzado"],
+  "Hogar y Jardín": ["Decoración", "Muebles", "Jardín"],
+  Deportes: ["Fitness", "Running", "Outdoor"],
+  Juguetes: ["Educativos", "Construcción", "Muñecas"],
 };
 
 export interface BrandFilters {
@@ -153,8 +53,9 @@ export interface BrandFilters {
   discountsOnly: boolean;
 }
 
-export function filterBrands(filters: BrandFilters): Brand[] {
-  return MOCK_BRANDS.filter((brand) => {
+/** Client-side filter for already-loaded brands */
+export function filterBrands(brands: Brand[], filters: BrandFilters): Brand[] {
+  return brands.filter((brand) => {
     if (filters.search) {
       const q = filters.search.toLowerCase();
       if (
