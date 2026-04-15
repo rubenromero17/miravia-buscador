@@ -159,9 +159,15 @@ export const scrapeMiraviaBrands = createServerFn({ method: "POST" })
       return { brands, error: null };
     } catch (err) {
       console.error("Miravia scraping error:", err);
+      if (err instanceof Error && err.name === "AbortError") {
+        return {
+          brands: [],
+          error: "El scraping tardó demasiado (>20s). Miravia puede estar bloqueando la petición. Intenta con una categoría específica o más tarde.",
+        };
+      }
       return {
         brands: [],
-        error: `Error de conexión al scrapear Miravia: ${err instanceof Error ? err.message : "Unknown"}`,
+        error: `Error al scrapear Miravia: ${err instanceof Error ? err.message : "Desconocido"}`,
       };
     }
   });
