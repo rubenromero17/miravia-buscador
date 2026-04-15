@@ -63,7 +63,7 @@ function Index() {
     } finally {
       setIsLoading(false);
     }
-  }, [scrapeFn, filters.category, filters.search]);
+  }, [filters.category, filters.search]);
 
   const handleUseMock = useCallback(() => {
     setAllBrands(MOCK_BRANDS);
