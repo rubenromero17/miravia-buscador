@@ -5,7 +5,13 @@ const FIRECRAWL_API_URL = "https://api.firecrawl.dev/v2";
 
 function requireFirecrawlKey(): string {
   const key = process.env.FIRECRAWL_API_KEY;
-  if (!key) throw new Error("FIRECRAWL_API_KEY is not configured. Connect Firecrawl in Connectors.");
+  console.log("[miravia-scraper] FIRECRAWL_API_KEY present:", !!key);
+  if (!key) {
+    // List available env var names for debugging
+    const envKeys = Object.keys(process.env).filter(k => k.includes("FIRECRAWL") || k.includes("LOVABLE"));
+    console.error("[miravia-scraper] Available related env vars:", envKeys);
+    throw new Error("FIRECRAWL_API_KEY is not configured. Connect Firecrawl in Connectors.");
+  }
   return key;
 }
 
