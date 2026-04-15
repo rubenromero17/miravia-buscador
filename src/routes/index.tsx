@@ -33,15 +33,13 @@ function Index() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const scrapeFn = useServerFn(scrapeMiraviaBrands);
-
   const brands = useMemo(() => filterBrands(allBrands, filters), [allBrands, filters]);
 
   const handleScrape = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const result = await scrapeFn({
+      const result = await scrapeMiraviaBrands({
         data: {
           category: filters.category || undefined,
           search: filters.search || undefined,
