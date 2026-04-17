@@ -29,14 +29,16 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "buscador-chollos" },
+      { name: "description", content: "Miravia Brand Explorer: Search, filter, and export Miravia brand and seller data." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "buscador-chollos" },
+      { property: "og:description", content: "Miravia Brand Explorer: Search, filter, and export Miravia brand and seller data." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "buscador-chollos" },
+      { name: "twitter:description", content: "Miravia Brand Explorer: Search, filter, and export Miravia brand and seller data." },
     ],
     links: [
       {
