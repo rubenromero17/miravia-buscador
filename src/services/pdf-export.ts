@@ -8,14 +8,14 @@ export function exportBrandsToPdf(brands: Brand[]) {
   // Title
   doc.setFontSize(18);
   doc.setFont("helvetica", "bold");
-  doc.text("Miravia — Directorio de Marcas", 14, 22);
+  doc.text("Empresas colaboradoras — Miravia & Groupon", 14, 22);
 
   // Subtitle
   doc.setFontSize(10);
   doc.setFont("helvetica", "normal");
   doc.setTextColor(120, 120, 120);
   doc.text(
-    `Generado el ${new Date().toLocaleDateString("es-ES")} · ${brands.length} marcas`,
+    `Generado el ${new Date().toLocaleDateString("es-ES")} · ${brands.length} empresas`,
     14,
     30
   );
@@ -24,14 +24,14 @@ export function exportBrandsToPdf(brands: Brand[]) {
   // Table
   autoTable(doc, {
     startY: 38,
-    head: [["Marca", "Nicho", "Tipo Producto", "Email", "Teléfono", "Ubicación"]],
+    head: [["Empresa", "Plataforma", "Email", "Teléfono", "Ubicación", "URL"]],
     body: brands.map((b) => [
       b.name,
-      b.category,
-      b.productType,
+      b.source ?? b.category,
       b.email ?? "No disponible",
       b.phone ?? "No disponible",
       b.location,
+      b.storeUrl ?? "—",
     ]),
     styles: { fontSize: 8, cellPadding: 3 },
     headStyles: {
@@ -43,5 +43,5 @@ export function exportBrandsToPdf(brands: Brand[]) {
     margin: { left: 14, right: 14 },
   });
 
-  doc.save("miravia-marcas.pdf");
+  doc.save("empresas-colaboradoras.pdf");
 }

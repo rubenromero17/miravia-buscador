@@ -1,4 +1,4 @@
-import { CATEGORIES, PRODUCT_TYPES, type BrandFilters } from "@/services/brand-service";
+import { PLATFORMS, type BrandFilters } from "@/services/brand-service";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -12,13 +12,11 @@ interface FilterSidebarProps {
 }
 
 export function FilterSidebar({ filters, onChange }: FilterSidebarProps) {
-  const productTypes = filters.category ? PRODUCT_TYPES[filters.category] ?? [] : [];
-
   const update = (partial: Partial<BrandFilters>) =>
     onChange({ ...filters, ...partial });
 
   const reset = () =>
-    onChange({ search: "", category: "", productType: "", discountsOnly: false });
+    onChange({ search: "", source: "", withContactOnly: false, discountsOnly: false });
 
   return (
     <aside className="w-72 shrink-0 rounded-xl border bg-card p-5 space-y-6 self-start sticky top-4"
@@ -28,49 +26,42 @@ export function FilterSidebar({ filters, onChange }: FilterSidebarProps) {
         Filtros
       </div>
 
-      {/* Category */}
+      {/* Source platform */}
       <div className="space-y-2">
-        <Label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Categoría / Nicho</Label>
+        <Label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Plataforma</Label>
         <Select
-          value={filters.category}
-          onValueChange={(v) => update({ category: v === "__all__" ? "" : v, productType: "" })}
+          value={filters.source || "__all__"}
+          onValueChange={(v) => update({ source: v === "__all__" ? "" : (v as BrandFilters["source"]) })}
         >
-          <SelectTrigger><SelectValue placeholder="Todas las categorías" /></SelectTrigger>
+          <SelectTrigger><SelectValue placeholder="Todas las plataformas" /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="__all__">Todas las categorías</SelectItem>
-            {CATEGORIES.map((c) => (
-              <SelectItem key={c} value={c}>{c}</SelectItem>
-            ))}
+            <SelectItem value="__all__">Todas las plataformas</SelectItem>
+            <SelectItem value="Miravia">Miravia</SelectItem>
+            <SelectItem value="Groupon">Groupon</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
-      {/* Product Type */}
+      {/* Search within results */}
       <div className="space-y-2">
-        <Label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Tipo de Producto</Label>
-        <Select
-          value={filters.productType}
-          onValueChange={(v) => update({ productType: v === "__all__" ? "" : v })}
-          disabled={productTypes.length === 0}
-        >
-          <SelectTrigger><SelectValue placeholder="Todos los tipos" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="__all__">Todos los tipos</SelectItem>
-            {productTypes.map((t) => (
-              <SelectItem key={t} value={t}>{t}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      {/* Brand search within filter */}
-      <div className="space-y-2">
-        <Label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Marca</Label>
+        <Label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Empresa</Label>
         <Input
-          placeholder="Filtrar por marca..."
+          placeholder="Filtrar por nombre..."
           value={filters.search}
           onChange={(e) => update({ search: e.target.value })}
         />
+      </div>
+
+      {/* Contact only */}
+      <div className="flex items-center gap-2">
+        <Checkbox
+          id="contact"
+          checked={filters.withContactOnly}
+          onCheckedChange={(checked) => update({ withContactOnly: checked === true })}
+        />
+        <Label htmlFor="contact" className="text-sm cursor-pointer">
+          Solo con contacto (email/tel)
+        </Label>
       </div>
 
       {/* Discounts */}
@@ -90,6 +81,10 @@ export function FilterSidebar({ filters, onChange }: FilterSidebarProps) {
         <RotateCcw className="h-3.5 w-3.5" />
         Limpiar filtros
       </Button>
+
+      <p className="text-[11px] text-muted-foreground leading-relaxed pt-2 border-t">
+        Las plataformas disponibles son: {PLATFORMS.map((p) => p.label).join(" · ")}.
+      </p>
     </aside>
   );
 }
