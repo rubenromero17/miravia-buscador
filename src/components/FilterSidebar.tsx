@@ -38,6 +38,19 @@ export function FilterSidebar({ filters, onChange }: FilterSidebarProps) {
             <SelectItem value="__all__">Todas las plataformas</SelectItem>
             <SelectItem value="Miravia">Miravia</SelectItem>
             <SelectItem value="Groupon">Groupon</SelectItem>
+            <SelectItem value="Chollometro">Chollometro</SelectItem>
+            <SelectItem value="Travelzoo">Travelzoo</SelectItem>
+            <SelectItem value="Gilt">Gilt</SelectItem>
+            <SelectItem value="LocalFlavor">LocalFlavor</SelectItem>
+            <SelectItem value="DealSaver">DealSaver</SelectItem>
+            <SelectItem value="LivingSocial">LivingSocial</SelectItem>
+            <SelectItem value="Wowcher">Wowcher</SelectItem>
+            <SelectItem value="Atrapalo">Atrápalo</SelectItem>
+            <SelectItem value="Letsbonus">Letsbonus</SelectItem>
+            <SelectItem value="Offerum">Offerum</SelectItem>
+            <SelectItem value="Oferplan">Oferplan</SelectItem>
+            <SelectItem value="Privalia">Privalia</SelectItem>
+            <SelectItem value="Westwing">Westwing</SelectItem>
           </SelectContent>
         </Select>
       </div>
